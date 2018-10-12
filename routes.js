@@ -34,4 +34,17 @@ router.get('/menu/:codigo', (req,res) => {
         res.json(rows)
     })
 })
+
+router.get('/productos/:codigo', (req,res) => {
+    const codigo = req.params.codigo
+    const query = `select p.codigo,p.imagen,p.nombre,p.descripcion,p.precio from productos p where p.idMenu=${codigo}`
+    mysql.query(query , (err,rows) => {
+        if(err){
+            console.log(err.message)
+            return
+        }
+        res.json(rows)
+    })
+})
+
 module.exports = router;
