@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('./conexion');
+const crypto = require('crypto');
 
 router.get("",(req,res) => {
     res.send('<h1>Api Restful DomiApp<h1>')
@@ -22,6 +23,19 @@ router.get("/negocios", (req,res) => {
     })
 })
 
+//Consultar usuarios
+router.post('/usuarios', (req,res) => {
+    let {email,clave} = req.body
+    let newClave = crypto.createHash('md5').update(clave).digest('hex');
+    mysql.query(`select id,email from usuarios where email = ? and clave = ?`,[email,newClave], (err,rows) => {
+        if(err){
+            console.log(err.message)
+            return
+        }
+        res.json(rows)
+    })
+})
+
 //Consultar los menus de un negocio
 router.get('/menu/:codigo', (req,res) => {
     const codigo = req.params.codigo
@@ -35,6 +49,7 @@ router.get('/menu/:codigo', (req,res) => {
     })
 })
 
+//Consultar producto por codigo
 router.get('/productos/:codigo', (req,res) => {
     const codigo = req.params.codigo
     const query = `select p.codigo,p.imagen,p.nombre,p.descripcion,p.precio from productos p where p.idMenu=${codigo}`
