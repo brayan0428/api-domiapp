@@ -39,7 +39,8 @@ router.post('/usuarios', (req,res) => {
 //Consultar los menus de un negocio
 router.get('/menu/:codigo', (req,res) => {
     const codigo = req.params.codigo
-    const query = `select codigo,nombre from menu where habilitado = 1 and idnegocio =${codigo}`
+    const query = `select m.codigo,m.nombre from menu m where m.habilitado = 1 and m.idnegocio =${codigo}
+                    and (select count(p.codigo) from productos p where p.idMenu = m.Codigo) > 0`
     mysql.query(query , (err,rows) => {
         if(err){
             console.log(err.message)
