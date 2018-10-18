@@ -63,4 +63,35 @@ router.get('/productos/:codigo', (req,res) => {
     })
 })
 
+router.post('/guardarPedido', (req,res) => {
+    let codigo = ""
+    mysql.query("select ifnull(max(codigo),0) + 1 as proximo from pedido_enc", (err,rows) => {
+        if(err){
+            console.log(err.message)
+            return
+        }
+        codigo = rows[0].proximo
+        const {idusuario,idnegocio,valor,direccion,metodopago} = req.body
+        mysql.query(`insert into pedido_enc(codigo,idusuario,idnegocio,valor,direccion,metodopago,fechaing)
+        values(?,?,?,?,?,?,NOW())`,[codigo,idusuario,idnegocio,valor,direccion,metodopago],(err,rows) => {
+            if(err){
+                console.log(err.message)
+                return
+            }
+            res.json(codigo)
+        })
+    })
+})
+
+router.post('/guardarPedidoDet' ,(req,res) => {
+    const {idpedido,idproducto,valor,cantidad} = req.body
+    mysql.query(`insert into pedido_det (idpedidoenc,idproducto,valor,cantidad)
+    values(?,?,?,?)`, [idpedido,idproducto,valor,cantidad] , (err,rows) => {
+        if(err){
+            console.log(err.message)
+            return
+        }
+        res.json(true)
+    })
+})
 module.exports = router;
