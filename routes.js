@@ -64,15 +64,16 @@ router.get('/productos/:codigo', (req,res) => {
 })
 
 router.post('/guardarPedido', (req,res) => {
-    res.json('ok')
-    /**let codigo = ""
+    let codigo = ""
     mysql.query("select ifnull(max(codigo),0) + 1 as proximo from pedido_enc", (err,rows) => {
         if(err){
             console.log(err.message)
+            res.json(err.message)
             return
         }
         codigo = rows[0].proximo
-        const {idusuario,idnegocio,valor,direccion,metodopago} = req.body
+        res.json(codigo)
+        /*const {idusuario,idnegocio,valor,direccion,metodopago} = req.body
         mysql.query(`insert into pedido_enc(codigo,idusuario,idnegocio,valor,direccion,metodopago,fechaing)
         values(?,?,?,?,?,?,NOW())`,[codigo,idusuario,idnegocio,valor,direccion,metodopago],(err,rows) => {
             if(err){
@@ -80,8 +81,8 @@ router.post('/guardarPedido', (req,res) => {
                 return
             }
             res.json(codigo)
-        })
-    })*/
+        })*/
+    })
 })
 
 router.post('/guardarPedidoDet' ,(req,res) => {
