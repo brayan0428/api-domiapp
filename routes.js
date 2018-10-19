@@ -86,15 +86,15 @@ router.post('/guardarPedido', (req,res) => {
 })
 
 router.post('/guardarPedidoDet' ,(req,res) => {
-    res.json("status")
-    /*const {idpedido,idproducto,valor,cantidad} = req.body
+    const {idpedido,idproducto,valor,cantidad} = req.body
     mysql.query(`insert into pedido_det (idpedidoenc,idproducto,valor,cantidad)
     values(?,?,?,?)`, [idpedido,idproducto,valor,cantidad] , (err,rows) => {
         if(err){
             console.log(err.message)
+            res.json(err.message)
             return
         }
         res.json(true)
-    })*/
+    })
 })
 module.exports = router;
