@@ -71,10 +71,10 @@ router.post('/guardarPedido', (req,res) => {
             res.json(err.message)
             return
         }
-        codigo = rows[0].proximo
-        res.json(codigo)
-        /*const {idusuario,idnegocio,valor,direccion,metodopago} = req.body
-        mysql.query(`insert into pedido_enc(codigo,idusuario,idnegocio,valor,direccion,metodopago,fechaing)
+        codigo = rows[0].proximo        
+        const {idusuario,idnegocio,valor,direccion,metodopago} = req.body
+        res.json(idusuario,idnegocio)
+        /*mysql.query(`insert into pedido_enc(codigo,idusuario,idnegocio,valor,direccion,metodopago,fechaing)
         values(?,?,?,?,?,?,NOW())`,[codigo,idusuario,idnegocio,valor,direccion,metodopago],(err,rows) => {
             if(err){
                 console.log(err.message)
