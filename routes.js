@@ -73,20 +73,21 @@ router.post('/guardarPedido', (req,res) => {
         }
         codigo = rows[0].proximo        
         const {idusuario,idnegocio,valor,direccion,metodopago} = req.body
-        res.json(idusuario)
-        /*mysql.query(`insert into pedido_enc(codigo,idusuario,idnegocio,valor,direccion,metodopago,fechaing)
+        mysql.query(`insert into pedido_enc(codigo,idusuario,idnegocio,valor,direccion,metodopago,fechaing)
         values(?,?,?,?,?,?,NOW())`,[codigo,idusuario,idnegocio,valor,direccion,metodopago],(err,rows) => {
             if(err){
                 console.log(err.message)
+                res.json(err.message)
                 return
             }
             res.json(codigo)
-        })*/
+        })
     })
 })
 
 router.post('/guardarPedidoDet' ,(req,res) => {
-    const {idpedido,idproducto,valor,cantidad} = req.body
+    res.json("status")
+    /*const {idpedido,idproducto,valor,cantidad} = req.body
     mysql.query(`insert into pedido_det (idpedidoenc,idproducto,valor,cantidad)
     values(?,?,?,?)`, [idpedido,idproducto,valor,cantidad] , (err,rows) => {
         if(err){
@@ -94,6 +95,6 @@ router.post('/guardarPedidoDet' ,(req,res) => {
             return
         }
         res.json(true)
-    })
+    })*/
 })
 module.exports = router;
