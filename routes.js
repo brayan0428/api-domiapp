@@ -64,7 +64,8 @@ router.get('/productos/:codigo', (req,res) => {
 })
 
 router.post('/guardarPedido', (req,res) => {
-    let codigo = ""
+    res.json('ok')
+    /**let codigo = ""
     mysql.query("select ifnull(max(codigo),0) + 1 as proximo from pedido_enc", (err,rows) => {
         if(err){
             console.log(err.message)
@@ -80,7 +81,7 @@ router.post('/guardarPedido', (req,res) => {
             }
             res.json(codigo)
         })
-    })
+    })*/
 })
 
 router.post('/guardarPedidoDet' ,(req,res) => {
