@@ -100,7 +100,7 @@ router.post('/guardarPedidoDet' ,(req,res) => {
 
 router.get('/mispedidos/:idusuario',(req,res) => {
     const idusuario = req.params.idusuario
-    mysql.query(`select p.codigo as numpedido,n.Nombre as nombrenegocio,p.valor as valortotal,date(p.fechaing) as fecha,p.entregado from pedido_enc p
+    mysql.query(`select p.codigo as numpedido,n.Nombre as nombrenegocio,p.valor as valortotal,date(p.fechaing) as fecha,case when p.entregado = 0 then 'No' else 'Si' end as entregado from pedido_enc p
     inner join negocios n on n.Codigo = p.idNegocio
     where p.idUsuario = ?`, [idusuario] , (err,rows) => {
         if(err){
