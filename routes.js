@@ -114,16 +114,17 @@ router.get('/mispedidos/:idusuario',(req,res) => {
 
 router.post('/usuarios',(req,res) => {
     let {nombre,email,clave} = req.body
-    let newClave = crypto.createHash('md5').update(clave).digest('hex');
+    res.json(nombre)
+    /*let newClave = crypto.createHash('md5').update(clave).digest('hex');
     mysql.query(`insert into usuarios (nombre,email,clave,fechaing,habilitado)
-    values(?,?,?,NOW(),1)`,[nombre,email,clave],(err,rows) => {
+    values(?,?,?,NOW(),1)`,[nombre,email,newClave],(err,rows) => {
         if(err){
             console.log(err.message)
             res.json(err.message)
             return
         }
         res.json('Ok')
-    })
+    })*/
 })
 
 module.exports = router;
