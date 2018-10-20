@@ -122,7 +122,7 @@ router.post('/usuarios',(req,res) => {
             res.json(err.message)
             return
         }
-        res.status(200).json('Ok')
+        res.json('Ok')
     })
 })
 
